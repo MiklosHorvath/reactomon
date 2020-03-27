@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './components/layout/Header';
 import Pokemons from './components/Pokemons';
+import TypeList from './components/pages/TypeList';
 
 import './App.css';
 class App extends Component {
@@ -30,9 +33,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Pokemons pokemons={this.state.pokemons} />
-      </div>
+      <Router>
+        <div className="App">
+          <Header />
+          <Route exact path="/" render={props => (
+              <React.Fragment>
+                <Pokemons pokemons={this.state.pokemons} />
+              </React.Fragment>
+          )} />
+          <Route path="/typelist" component={TypeList} />
+        </div>
+      </Router>
     );
   }
 }
